@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Green Earth</title>
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
 
     <!-- daisyui and tailwind css cdn -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
@@ -12,6 +13,7 @@
 </head>
 
 <body>
+    <!-- navbar section -->
     <nav class="">
         <div class="bg-[#15803D] navbar bg-base-100 shadow-sm px-2 md:px-20 ">
             <div class="navbar-start">
@@ -40,10 +42,25 @@
                 </ul>
             </div>
             <div class="navbar-end ">
-                <a class="btn bg-[#FACC15] rounded-full text-[#15803D]">Plant a Tree</a>
+                <button class="btn bg-[#FACC15] rounded-full text-[#15803D]">Plant a Tree</button>
             </div>
         </div>
     </nav>
+
+    <!-- banner section -->
+    <section class="bg-[#CFF0DC] flex flex-col md:flex-row gap-6 justify-between">
+        <div class="">
+            <img src="./assets/hero-leaf1.png" alt="">
+        </div>
+        <div class="text-center flex flex-col justify-center items-center">
+            <h1 class="text-[#1F2937] text-4xl font-extrabold">Plant a Tree, Grow a Future</h1>
+            <p class="text-gray-600 mb-6 mt-2">Join our mission to plant 1 million trees and make the Earth greener for future generations.</p>
+            <button class="btn bg-[#FACC15] rounded-full text-[#15803D]">Get Involved</button>
+        </div>
+        <div class="">
+            <img src="./assets/hero-leaf2.png" alt="">
+        </div>
+    </section>
 </body>
 
 </html>
