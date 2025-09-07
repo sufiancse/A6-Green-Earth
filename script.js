@@ -1,3 +1,5 @@
+let addToCart = []
+
 document.getElementById('all-trees-btn').addEventListener('click', function () {
     removeActive()
     const btn = document.getElementById('all-trees-btn')
@@ -53,7 +55,7 @@ const showAllPlant = (allData) => {
     allData.forEach(data => {
         // console.log(data.image);
         card.innerHTML += `
-      <div class="bg-white p-4 rounded-xl space-y-2 shadow-md h-fit">
+      <div id="${data.id}" class="bg-white p-4 rounded-xl space-y-2 shadow-md h-fit">
                         <div class="mx-auto">
                             <img src="${data.image}" class="max-h-[150px] w-full rounded-lg" alt="">
                         </div>
@@ -88,10 +90,30 @@ const showCardDetails = (cardDetails) => {
                     <p class=" text-gray-700"><span class="font-semibold text-black">Price:</span> ৳${cardDetails.price}</p>
                     <p class="py-2 text-gray-700"><span class="font-semibold text-black">Category:</span> ${cardDetails.description}</p>
  `
- document.getElementById('my_modal_5').showModal()
+    document.getElementById('my_modal_5').showModal()
 }
 
 
+// add to cart sections start here
+document.getElementById('card').addEventListener('click', (e) => {
+    if (e.target.tagName === "BUTTON") {
+        handleAddToCart(e)
+    }
+})
+
+const handleAddToCart = (e) => {
+    const btn = e.target
+    const cardName = btn.parentNode.children[1].innerText
+    const cardPrice = btn.parentNode.children[3].children[1].children[0].innerText
+    const id = btn.parentNode.id
+
+    addToCart.push({
+        title: cardName,
+        price: cardPrice,
+        id: id
+    })
+    console.log(addToCart);
+}
 
 
 
