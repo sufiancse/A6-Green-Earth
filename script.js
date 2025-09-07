@@ -1,5 +1,13 @@
-let addToCart = []
+let addToCarts = []
 
+// remove active button
+const removeActive = () => {
+    const categoryBtns = document.querySelectorAll(".category-btn")
+    categoryBtns.forEach(btn => {
+        btn.classList.remove('active')
+    })
+}
+// click All Trees to display all plants card
 document.getElementById('all-trees-btn').addEventListener('click', function () {
     removeActive()
     const btn = document.getElementById('all-trees-btn')
@@ -7,28 +15,24 @@ document.getElementById('all-trees-btn').addEventListener('click', function () {
     allPlant()
 })
 
+// load all category
 const allCategory = () => {
     const url = "https://openapi.programming-hero.com/api/categories"
     fetch(url)
         .then(res => res.json())
         .then(data => showCategory(data.categories))
 }
+// display all category
 const showCategory = (categories) => {
     const categoryDiv = document.getElementById('all-categories')
     categories.forEach(category => {
         categoryDiv.innerHTML += `
         <h2 id="category-btn-${category.id}" onclick="categoryButton(${category.id})" class="text-black hover:text-white hover:bg-[#15803D] rounded-sm hover:cursor-pointer p-1 pl-3 mb-1 category-btn">${category.category_name}</h2>
         `
-        // console.log(category.id);
     });
 }
 
-const removeActive = () => {
-    const categoryBtns = document.querySelectorAll(".category-btn")
-    categoryBtns.forEach(btn => {
-        btn.classList.remove('active')
-    })
-}
+//similar category functional button
 const categoryButton = (id) => {
     const url = `https://openapi.programming-hero.com/api/category/${id}`
     fetch(url)
@@ -42,13 +46,14 @@ const categoryButton = (id) => {
         })
 }
 
-
+// load all plants
 const allPlant = () => {
     const url = "https://openapi.programming-hero.com/api/plants"
     fetch(url)
         .then(res => res.json())
         .then(data => showAllPlant(data.plants))
 }
+// display all plants
 const showAllPlant = (allData) => {
     const card = document.getElementById('card')
     card.innerHTML = ""
@@ -72,13 +77,14 @@ const showAllPlant = (allData) => {
     })
 }
 
+// load plant id for modal
 const loadCardDetails = (id) => {
     const url = `https://openapi.programming-hero.com/api/plant/${id}`
     fetch(url)
         .then(res => res.json())
         .then(data => showCardDetails(data.plants))
 }
-
+// display every plant details in modal
 const showCardDetails = (cardDetails) => {
     console.log(cardDetails);
     const modal = document.getElementById('modal-div')
@@ -106,24 +112,78 @@ const handleAddToCart = (e) => {
     const cardName = btn.parentNode.children[1].innerText
     const cardPrice = btn.parentNode.children[3].children[1].children[0].innerText
     const id = btn.parentNode.id
+    let quantity = 1;
 
-    addToCart.push({
-        title: cardName,
-        price: cardPrice,
-        id: id
+    alert(`${cardName} added to the cart.☑️`)
+
+    const existing = addToCarts.find(cart => cart.id == id)
+    if (existing) {
+        existing.quantity += 1
+    }
+    else {
+        addToCarts.push({
+            title: cardName,
+            price: cardPrice,
+            id: id,
+            quantity: quantity
+        })
+    }
+
+    showCart(addToCarts);
+}
+// display cart
+const showCart = (carts) => {
+    const addCarts = document.getElementById('add-carts')
+    const totalPrice = document.getElementById('total')
+    const totalSection = document.getElementById('total-section')
+    addCarts.innerHTML = ""
+
+    let total = 0
+
+    carts.forEach(cart => {
+        // console.log(cart);
+        const itemsTotal = cart.price * cart.quantity
+        total += itemsTotal
+        addCarts.innerHTML += `
+         <div class="bg-[#F0FDF4] rounded-lg px-3 py-2 mb-3 flex justify-between items-center">
+                        <div class="">
+                            <h1 class="font-bold">${cart.title}</h1>
+                            <p class="text-gray-500">৳<span>${cart.price}</span> x <span>${cart.quantity}</span></p>
+                        </div>
+                        <button onclick="deleteCart(${cart.id})" class="text-gray-500 cursor-pointer">❌</button>
+                    </div>
+
+        `
     })
-    console.log(addToCart);
+    if (total === 0) {
+        totalSection.classList.add("hidden")
+    }
+    else{
+        totalSection.classList.remove("hidden")
+    }
+    totalPrice.innerText = total
+}
+// delete cart calculation
+const deleteCart = (cartId) => {
+    const itemsIndex = addToCarts.findIndex(cart => cart.id == cartId)
+    if(itemsIndex !== -1){
+        if(addToCarts[itemsIndex].quantity > 1){
+            alert(`${addToCarts[itemsIndex].title} removed from the cart.❌`)
+            addToCarts[itemsIndex].quantity -= 1;
+        }
+        else{
+            alert(`${addToCarts[itemsIndex].title} removed from the cart.❌`)
+            addToCarts.splice(itemsIndex, 1)
+        }
+    }
+    showCart(addToCarts)
 }
 
 
 
-
-
+// default active button
 window.onload = () => {
     document.getElementById("all-trees-btn").classList.add("active")
     allCategory()
     allPlant()
 }
-
-// allCategory()
-// allPlant()
