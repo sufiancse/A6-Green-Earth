@@ -10,6 +10,13 @@
     <!-- daisyui and tailwind css cdn -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+        .active {
+            color: white;
+            background-color: #15803D;
+        }
+    </style>
 </head>
 
 <body>
@@ -72,20 +79,27 @@
             <h1 class="text-[#1F2937] text-2xl font-bold mb-7 text-center">Choose Your Trees</h1>
 
             <section class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
                 <!-- category -->
                 <div class="col-span-8 md:col-span-2">
                     <h1 class="text-xl font-bold mb-3">Categories</h1>
-                    <div id="all-categories" class="grid grid-cols-3 md:grid-cols-1"></div>
+                    <h1 id="all-trees-btn"
+                        class="text-black hover:text-white hover:bg-[#15803D] rounded-sm hover:cursor-pointer p-1 pl-3 mb-1 category-btn">
+                        All Trees</h1>
+
+                    <div id="all-categories" class="grid grid-cols-3 md:grid-cols-1">
+
+                    </div>
                 </div>
 
                 <!-- card -->
                 <div id="card" class="grid grid-cols-1 md:grid-cols-3 gap-7 col-span-8">
-                    
-                   
+
+
                 </div>
 
                 <!-- add to cart -->
-                 <div class="bg-white p-4 rounded-xl col-span-8 md:col-span-2">
+                <div class="bg-white p-4 rounded-xl col-span-8 md:col-span-2">
                     <h1 class="text-xl font-bold pb-3">Your Cart</h1>
                     <div class="bg-[#F0FDF4] rounded-lg px-3 py-2 mb-3 flex justify-between items-center">
                         <div class="">
@@ -99,8 +113,24 @@
                         <h1>Total:</h1>
                         <p>$<span>100</span></p>
                     </div>
-                 </div>
+                </div>
             </section>
+
+            <!-- modal -->
+            <!-- Open the modal using ID.showModal() method -->
+            <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+            <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+                <div class="modal-box">
+                    <h3 class="text-lg font-bold">Hello!</h3>
+                    <p class="py-4">Press ESC key or click the button below to close</p>
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
         </section>
 
         <!-- About the Campaign -->
