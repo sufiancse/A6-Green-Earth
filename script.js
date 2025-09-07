@@ -53,15 +53,15 @@ const showAllPlant = (allData) => {
     allData.forEach(data => {
         // console.log(data.image);
         card.innerHTML += `
-      <div class="bg-white p-4 rounded-xl space-y-2 ">
+      <div class="bg-white p-4 rounded-xl space-y-2 shadow-md h-fit">
                         <div class="mx-auto">
                             <img src="${data.image}" class="max-h-[150px] w-full rounded-lg" alt="">
                         </div>
-                        <h1  onclick="loadDetails(${data.id})" id=""  class="text-xl font-bold hover:cursor-pointer">${data.name}</h1>
+                        <h1  onclick="loadCardDetails(${data.id})" id=""  class="text-xl font-bold hover:cursor-pointer">${data.name}</h1>
                         <p class="text-sm text-gray-600 line-clamp-3">${data.description}</p>
                         <div class="flex justify-between">
                             <p class=" px-3  py-1 bg-[#DCFCE7] rounded-full text-[#15803D]">${data.category}</p>
-                            <p class="text-xl font-bold">$<span>${data.price}</span></p>
+                            <p class="text-xl font-bold ">৳<span>${data.price}</span></p>
                         </div>
                         <button class="btn bg-[#15803D] rounded-full text-white w-full">Add to Cart</button>
                     </div>
@@ -70,10 +70,26 @@ const showAllPlant = (allData) => {
     })
 }
 
-const loadDetails = (id) => {
+const loadCardDetails = (id) => {
     const url = `https://openapi.programming-hero.com/api/plant/${id}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => showCardDetails(data.plants))
 }
 
+const showCardDetails = (cardDetails) => {
+    console.log(cardDetails);
+    const modal = document.getElementById('modal-div')
+    modal.innerHTML = ""
+    modal.innerHTML += `
+                    <h3 class="text-xl font-bold mb-3">${cardDetails.name}</h3>
+                    <img src="${cardDetails.image}" class="max-h-[250px] w-full rounded-lg" alt="" />
+                    <p class="py-2 text-gray-700"><span class="font-semibold text-black">Category:</span> ${cardDetails.category}</p>
+                    <p class=" text-gray-700"><span class="font-semibold text-black">Price:</span> ৳${cardDetails.price}</p>
+                    <p class="py-2 text-gray-700"><span class="font-semibold text-black">Category:</span> ${cardDetails.description}</p>
+ `
+ document.getElementById('my_modal_5').showModal()
+}
 
 
 
