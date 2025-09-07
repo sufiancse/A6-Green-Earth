@@ -86,7 +86,6 @@ const loadCardDetails = (id) => {
 }
 // display every plant details in modal
 const showCardDetails = (cardDetails) => {
-    console.log(cardDetails);
     const modal = document.getElementById('modal-div')
     modal.innerHTML = ""
     modal.innerHTML += `
