@@ -95,6 +95,34 @@ https://openapi.programming-hero.com/api/plant/1
 
 #### 5) Explain template literals in ES6. How are they different from string concatenation?
 
+#### Answer the questions
+1) (i) var is not block scope, its ignore block scope. it can be reassigned. we can use it before declaring but the value is undefined. (ii) let is block  scope. we cannot redeclare in the same scope. it can be reassigned. (iii) const is block scope. we cannot redeclare in the same scope, it cannot be reassigned.
+
+2) (i) map(): its return e new array same length as input array. we can use it for transforms elements. (ii) forEach(): it is same as loop but its return undefined. we can use it for update dom elements. (iii) filter(): use filter we can filtering elements using condition. its return a new array.
+
+3) arrow function is special shorthand syntax function in ES6. if function is single expression its return automatically.this function do not have their own arguments. 
+
+4) array destructuring:<br/>
+ ```bash
+        const num = [1,2,3,4]
+        const [a, b, c, d] = num;
+        condole.log(a, b, c, d)
+``` </br>
+ object-destructuring <br/>
+  ```bash
+        const student ={
+                name: "Donald Trump",
+                age: 20,
+                department: "Computer Science"
+        }
+        const {name, age, department} = student
+        console.log(name, age, department)
+```
+
+
+
+
+
 ## ⚙️ Functionalities 
 
 1) Category Loading 
