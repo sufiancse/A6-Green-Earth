@@ -102,14 +102,15 @@ https://openapi.programming-hero.com/api/plant/1
 
 3) arrow function is special shorthand syntax function in ES6. if function is single expression its return automatically.this function do not have their own arguments. 
 
-4) array destructuring:<br/>
+4) i) example of destructuring:<br/>
  ```bash
+        //array-destructuring
         const num = [1,2,3,4]
         const [a, b, c, d] = num;
         condole.log(a, b, c, d)
-``` </br>
- object-destructuring <br/>
-  ```bash
+``` 
+ ```bash
+        //object-destructuring
         const student ={
                 name: "Donald Trump",
                 age: 20,
@@ -119,6 +120,17 @@ https://openapi.programming-hero.com/api/plant/1
         console.log(name, age, department)
 ```
 
+5) template literals is very useful feature in ES6. use template literals we can display multiline without using \n. template literals uses backtick (``). 
+```bash
+        const name = "Jhankar Mahbub";
+        const age = 40;
+
+        //old-string-concatenation
+        console.log("Student name: " + name + "Student age: " + age)
+
+        //new-string-concatenation-using-template-literals
+        condole.log(`Student name: ${name} and Student age: ${age}`)
+```
 
 
 
