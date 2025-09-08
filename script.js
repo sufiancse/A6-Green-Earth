@@ -62,6 +62,7 @@ const allPlant = () => {
 const showAllPlant = (allData) => {
     const card = document.getElementById('card')
     card.innerHTML = ""
+
     allData.forEach(data => {
         // console.log(data.image);
         card.innerHTML += `
@@ -118,7 +119,7 @@ const handleAddToCart = (e) => {
     const id = btn.parentNode.id
     let quantity = 1;
 
-    alert(`${cardName} added to the cart.☑️`)
+    alert(`${cardName} has been added to the cart.☑️`)
 
     const existing = addToCarts.find(cart => cart.id == id)
     if (existing) {
@@ -172,11 +173,11 @@ const deleteCart = (cartId) => {
     const itemsIndex = addToCarts.findIndex(cart => cart.id == cartId)
     if (itemsIndex !== -1) {
         if (addToCarts[itemsIndex].quantity > 1) {
-            alert(`${addToCarts[itemsIndex].title} removed from the cart.❌`)
+            alert(`${addToCarts[itemsIndex].title} has been removed from the cart.❌`)
             addToCarts[itemsIndex].quantity -= 1;
         }
         else {
-            alert(`${addToCarts[itemsIndex].title} removed from the cart.❌`)
+            alert(`${addToCarts[itemsIndex].title} has been removed from the cart.❌`)
             addToCarts.splice(itemsIndex, 1)
         }
     }
@@ -185,13 +186,13 @@ const deleteCart = (cartId) => {
 
 // show loading
 const showLoading = () => {
-    const card = document.getElementById('card')
-    card.innerHTML = ""
-    card.innerHTML += `
-  <div class="col-span-3 mx-auto">
-    <span class="loading loading-bars loading-xl text-green-900"></span>
-</div>
-  `
+        const card = document.getElementById('card')
+        card.innerHTML = ""
+        card.innerHTML += `
+      <div class="col-span-3 mx-auto">
+        <span class="loading loading-bars loading-xl text-green-900"></span>
+    </div>
+      `
 }
 
 

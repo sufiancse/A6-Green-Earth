@@ -43,9 +43,9 @@
         const age = 40;
 
         //old-string-concatenation
-        console.log("Student name: " + name + "Student age: " + age)
+        console.log("Teacher name: " + name + "Teacher age: " + age)
 
         //new-string-concatenation-using-template-literals
-        condole.log(`Student name: ${name} and Student age: ${age}`)
+        condole.log(`Teacher name: ${name} and Teacher age: ${age}`)
 ```
 
