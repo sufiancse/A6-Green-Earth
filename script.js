@@ -13,6 +13,7 @@ document.getElementById('all-trees-btn').addEventListener('click', function () {
     const btn = document.getElementById('all-trees-btn')
     btn.classList.add('active')
     allPlant()
+
 })
 
 // load all category
@@ -35,6 +36,7 @@ const showCategory = (categories) => {
 //similar category functional button
 const categoryButton = (id) => {
     const url = `https://openapi.programming-hero.com/api/category/${id}`
+    showLoading()
     fetch(url)
         .then(res => res.json())
         .then(data => {
@@ -43,12 +45,15 @@ const categoryButton = (id) => {
             // console.log(clickBtn);
             clickBtn.classList.add('active')
             showAllPlant(data.plants)
+
         })
+
 }
 
 // load all plants
 const allPlant = () => {
     const url = "https://openapi.programming-hero.com/api/plants"
+    showLoading()
     fetch(url)
         .then(res => res.json())
         .then(data => showAllPlant(data.plants))
@@ -62,9 +67,9 @@ const showAllPlant = (allData) => {
         card.innerHTML += `
       <div id="${data.id}" class="bg-white p-4 rounded-xl space-y-2 shadow-md h-fit">
                         <div class="mx-auto">
-                            <img src="${data.image}" class="max-h-[150px] w-full rounded-lg" alt="">
+                            <img src="${data.image}" class="max-h-[230px] md:max-h-[150px] w-full rounded-lg" alt="">
                         </div>
-                        <h1  onclick="loadCardDetails(${data.id})" id=""  class="text-xl font-bold hover:cursor-pointer">${data.name}</h1>
+                        <h1  onclick="loadCardDetails(${data.id})" id=""  class="text-xl font-bold hover:cursor-pointer" >${data.name}</h1>
                         <p class="text-sm text-gray-600 line-clamp-3">${data.description}</p>
                         <div class="flex justify-between">
                             <p class=" px-3  py-1 bg-[#DCFCE7] rounded-full text-[#15803D]">${data.category}</p>
@@ -90,7 +95,7 @@ const showCardDetails = (cardDetails) => {
     modal.innerHTML = ""
     modal.innerHTML += `
                     <h3 class="text-xl font-bold mb-3">${cardDetails.name}</h3>
-                    <img src="${cardDetails.image}" class="max-h-[250px] w-full rounded-lg" alt="" />
+                    <img src="${cardDetails.image}" class="max-h-[300px] w-full rounded-lg" alt="" />
                     <p class="py-2 text-gray-700"><span class="font-semibold text-black">Category:</span> ${cardDetails.category}</p>
                     <p class=" text-gray-700"><span class="font-semibold text-black">Price:</span> ৳${cardDetails.price}</p>
                     <p class="py-2 text-gray-700"><span class="font-semibold text-black">Category:</span> ${cardDetails.description}</p>
@@ -157,7 +162,7 @@ const showCart = (carts) => {
     if (total === 0) {
         totalSection.classList.add("hidden")
     }
-    else{
+    else {
         totalSection.classList.remove("hidden")
     }
     totalPrice.innerText = total
@@ -165,12 +170,12 @@ const showCart = (carts) => {
 // delete cart calculation
 const deleteCart = (cartId) => {
     const itemsIndex = addToCarts.findIndex(cart => cart.id == cartId)
-    if(itemsIndex !== -1){
-        if(addToCarts[itemsIndex].quantity > 1){
+    if (itemsIndex !== -1) {
+        if (addToCarts[itemsIndex].quantity > 1) {
             alert(`${addToCarts[itemsIndex].title} removed from the cart.❌`)
             addToCarts[itemsIndex].quantity -= 1;
         }
-        else{
+        else {
             alert(`${addToCarts[itemsIndex].title} removed from the cart.❌`)
             addToCarts.splice(itemsIndex, 1)
         }
@@ -178,6 +183,16 @@ const deleteCart = (cartId) => {
     showCart(addToCarts)
 }
 
+// show loading
+const showLoading = () => {
+    const card = document.getElementById('card')
+    card.innerHTML = ""
+    card.innerHTML += `
+  <div class="col-span-3 mx-auto">
+    <span class="loading loading-bars loading-xl text-green-900"></span>
+</div>
+  `
+}
 
 
 // default active button
